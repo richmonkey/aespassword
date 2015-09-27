@@ -1,0 +1,12 @@
+{
+  "name": "aespassword",
+  "version": "0.1.0",
+  "main": "main.js",
+  "description": "aespassword",
+  "productName": "aespassword",
+  "dependencies": {
+    "async": "^1.4.2",
+    "sqlite3": "^3.1.0",
+    "underscore-plus": "^1.6.6"
+  }
+}
