@@ -19,12 +19,12 @@ var htmlLayout = {
             html.push(util.format(' <tr data-id="%d" data-iv="%s" data-password="%s" data-provider="%s" data-user="%s">' +
                 '<td>%s</td>' +
                 '<td>%s</td>' +
-                '<td>******<a href="#" class="btn btn-success" data-action="show">查看</a></td>' +
+                '<td><span class="pass">******</span><a href="#" class="btn btn-success" data-action="show">查看</a></td>' +
                 '<td>' +
                 '<a href="#" data-action="update" class="btn btn-info">修改</a>' +
                 '<a href="#" data-action="remove" class="btn btn-remove">删除</a>' +
                 '</td>' +
-                '</tr>', row.id, row.iv, row.password, row.provider, row.provider, row.name, row.name))
+                '</tr>', row.id, row.iv, row.password, row.provider, row.name, row.provider, row.name))
         }
         return html.join('');
     }
@@ -66,7 +66,6 @@ onload = function () {
             }
         ], function (err, rows) {
             if (err) {
-                //alert
                 console.log("db err:" + err);
                 return;
             }
@@ -83,10 +82,7 @@ onload = function () {
     };
     //for test
     var passwordID = 0;
-
-
-    var createButton = document.getElementById("create");
-    createButton.onclick = function () {
+    var create = function () {
         console.log("create");
         var serviceProvider = document.getElementById('serviceProvider').value.trim(),
             userName = document.getElementById('userName').value.trim(),
@@ -141,16 +137,38 @@ onload = function () {
             passwordID = id;
             if (!err) {
                 //alert insert success
-            } else {
-                //todo insert to list
+                helper.tip('创建成功！');
+                document.getElementById('form').reset();
                 loadList();
+            } else {
+                helper.tip('创建失败！');
             }
         });
     };
-
-    var updateButton = document.getElementById("update");
-    updateButton.onclick = function (e) {
+    var update = function () {
         console.log("update");
+        var update = document.getElementById('update_wrap'),
+            passwordID = update.querySelector('input[name="id"]').value,
+            serviceProvider = update.querySelector('input[name="serviceProvider"]').value,
+            userName = update.querySelector('input[name="userName"]').value,
+            pass2 = update.querySelector('input[name="pass"]').value.trim(),
+            secretKey = update.querySelector('input[name="secretKey"]').value.trim();
+        if (!serviceProvider) {
+            helper.tip('服务商不能为空!');
+            return false;
+        }
+        if (!userName) {
+            helper.tip('用户名不能为空!');
+            return false;
+        }
+        if (!pass2) {
+            helper.tip('密码不能为空!');
+            return false;
+        }
+        if (!secretKey) {
+            helper.tip('密钥不能为空!');
+            return false;
+        }
         async.waterfall([
             function (callback) {
                 //获取上次使用的密钥
@@ -176,21 +194,15 @@ onload = function () {
                     });
             }], function (err) {
             if (!err) {
-                //alert update success
+                helper.tip('修改成功！');
+                loadList();
+                document.querySelector('.dialog').style.display = 'none';
+            } else {
+                helper.tip('修改失败！');
             }
-        });
+        })
     };
-    /*
-     var removeButton = document.getElementById("remove");
-     removeButton.onclick = function (e) {
-     //todo alert is really delete?
-     password.removePassword(passwordID, function (err) {
-     console.log("remove password err:" + err);
-     //alert remove success
-     });
-     };
-     */
-    var removePassword = function (id) {
+    var remove = function (id) {
         if (confirm('确认删除？')) {
             password.removePassword(id, function (err) {
                 if (!err) {
@@ -213,34 +225,53 @@ onload = function () {
                 user = tr.dataset.user,
                 provider = tr.dataset.provider;
             if (action == 'remove') {
-                removePassword(id);
+                remove(id);
             } else if (action == 'update') {
                 var update = document.getElementById('update_wrap');
                 update.querySelector('input[name="id"]').value = id;
                 update.querySelector('input[name="serviceProvider"]').value = provider;
                 update.querySelector('input[name="userName"]').value = user;
                 update.style.display = 'block';
-
             } else if (action == 'show') {
-
+                var show = document.getElementById('show_wrap');
+                show.querySelector('input[name="id"]').value = id;
+                show.style.display = 'block';
             }
             e.preventDefault();
         }
     };
-    document.getElementById('cancel').onclick = function () {
+    var show = function () {
+        var show = document.getElementById('show_wrap'),
+            id = show.querySelector('input[name="id"]').value,
+            secretKey = show.querySelector('input[name="secretKey"]').value,
+            tr = document.querySelector('tbody tr[data-id="' + id + '"]'),
+            pass = tr.dataset.password,
+            iv = tr.dataset.iv;
+        try {
+            var p = password.decrypt(secretKey, pass, iv);
+            tr.querySelector('.pass').innerText = p;
+            show.querySelector('input[name="secretKey"]').value = '';
+            document.getElementById('show_wrap').style.display = 'none';
+
+        } catch (e) {
+            helper.tip('密钥错误！');
+
+        }
+    };
+    document.getElementById('cancel_update').onclick = function () {
         document.getElementById('update_wrap').style.display = 'none';
     };
-    //var listButton = document.getElementById("list");
-    //listButton.onclick = function (e) {
-    //    password.listPassword(function (err, rows) {
-    //        for (var i = 0; i < rows.length; i++) {
-    //            var row = rows[i];
-    //            console.log(util.format("%d:%s:%s:%s:%s", row.id, row.provider, row.name, row.password, row.iv));
-    //
-    //            var p = password.decrypt(secretKey, row.password, row.iv);
-    //            console.log("clear password:" + p);
-    //        }
-    //    });
-    //}
+    document.getElementById('update').onclick = function () {
+        update();
+    };
+    document.getElementById("create").onclick = function () {
+        create();
+    };
+    document.getElementById("show").onclick = function () {
+        show();
+    };
+    document.getElementById('cancel_show').onclick = function () {
+        document.getElementById('show_wrap').style.display = 'none';
+    };
     loadList();
 };

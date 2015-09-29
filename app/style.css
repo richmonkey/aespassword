@@ -148,9 +148,9 @@ table {
     font-size: 0.825rem;
     border-radius: 5px; }
 
-.update {
+.dialog {
   display: none; }
-  .update:before {
+  .dialog:before {
     content: ' ';
     position: fixed;
     z-index: 1;
@@ -159,7 +159,9 @@ table {
     top: 0;
     width: 100%;
     height: 100%; }
-  .update .form-wrap {
+  .dialog.show .form-wrap {
+    height: 250px; }
+  .dialog .form-wrap {
     position: absolute;
     width: 400px;
     height: 400px;
@@ -169,22 +171,22 @@ table {
     margin: -200px auto auto -200px;
     background-color: #fff;
     z-index: 100; }
-    .update .form-wrap .ipt-wrap {
+    .dialog .form-wrap .ipt-wrap {
       padding: 20px; }
-    .update .form-wrap label {
+    .dialog .form-wrap label {
       display: block;
       text-align: left; }
-    .update .form-wrap input {
+    .dialog .form-wrap input {
       display: block;
       width: 100%; }
-    .update .form-wrap h2 {
+    .dialog .form-wrap h2 {
       height: 42px;
       background-color: #444;
       color: #fff;
       line-height: 42px;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px; }
-    .update .form-wrap .btn {
+    .dialog .form-wrap .btn {
       margin-bottom: 10px; }
 
 /*# sourceMappingURL=style.css.map */
