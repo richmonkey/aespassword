@@ -1,53 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>AESPassword</title>
-    <style>
-      #container {
-      display: table; border-spacing: 50px;
-      }
-
-      #row  {
-      display: table-row; border-spacing: 5px
-      }
-
-      #left, #right, #middle {
-      display: table-cell;  margin: 4px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-  <input type="button" id="create" value="新建密码"/>
-  <input type="button" id="update" value="更新密码"/>
-  <input type="button" id="remove" value="删除密码"/>
-  <input type="button" id="list" value="遍历密码"/>
-
-  <div id="container">
-    <div id="row">
-
-      <div id="left">
-  	<h4>服务商</h4>
-  	<p>tt</p>
-      </div>
-
-      <div id="middle">
-  	<h4>用户名</h4>
-  	<p>ll</p>
-      </div>
-
-      <div id="right">
-    	<h4>密码</h4>
-    	<p>mm</p>
-      </div>
-
+<div class="tip"><span></span></div>
+<header class="top-bar">
+    <form action="#" id="form">
+        <div class="form-wrap">
+            <label>服务商：<input type="text" id="serviceProvider" class="ipt"></label>
+            <label>用户名：<input type="text" id="userName" class="ipt"></label>
+            <label>密码：<input type="text" id="pass" class="ipt"></label>
+            <label>密钥：<input type="text" id="secretKey" class="ipt"></label>
+            <input class="btn btn-primary" type="button" id="create" value="创建"/>
+        </div>
+    </form>
+    <!--<input class="btn btn-primary" type="button" id="update" value="更新密码"/>-->
+    <!--<input class="btn btn-primary" type="button" id="remove" value="删除密码"/>-->
+    <!--<input class="btn btn-primary" type="button" id="list" value="遍历密码"/>-->
+</header>
+<div id="container">
+    <table id="list">
+        <thead>
+        <tr>
+            <th>服务商</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th class="opt">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<section class="update" id="update_wrap">
+    <div class="form-wrap">
+        <h2>修改</h2>
+        <div class="ipt-wrap">
+            <input type="hidden" name="id" value="">
+            <label>服务商：<input type="text" name="serviceProvider" class="ipt"></label>
+            <label>用户名：<input type="text" name="userName" class="ipt"></label>
+            <label>密码：<input type="text" name="pass" class="ipt"></label>
+            <label>密钥：<input type="text" name="secretKey" class="ipt"></label>
+            <label><input class="btn btn-primary" type="button" id="update" value="修改"/></label>
+            <label><input class="btn btn-cancel" type="button" id="cancel" value="取消"/></label>
+        </div>
     </div>
-  </div>
-
-  <script src="index.js" type="text/javascript"></script>
-  <script>
-  </script>
+</section>
+<script src="index.js" type="text/javascript"></script>
+<script>
+</script>
 </body>
 </html>
