@@ -1,9 +1,9 @@
 {
-  "name": "aespassword",
+  "name": "AESpassword",
   "version": "0.1.0",
   "main": "main.js",
-  "description": "aespassword",
-  "productName": "aespassword",
+  "description": "aespassword is another 1password",
+  "productName": "AESPassword",
   "dependencies": {
     "async": "^1.4.2",
     "sqlite3": "^3.1.0",

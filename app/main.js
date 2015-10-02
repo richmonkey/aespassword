@@ -5,16 +5,15 @@ var fs = require('fs');
 var path = require('path');
 var net = require('net');
 var util = require('util');
-
+var Menu = require('menu');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
 global.mainWindow = null;
+global.menu = null;
+
 
 function main() {
-    app.commandLine.appendSwitch('--enable-npapi');
-
-    // Quit when all windows are closed.
     app.on('window-all-closed', function() {
         // On OS X it is common for applications and their menu bar
         // to stay active until the user quits explicitly with Cmd + Q
@@ -37,7 +36,7 @@ function main() {
                                         }});
 
         // Open the devtools.
-        mainWindow.openDevTools();
+        //mainWindow.openDevTools();
 
         // Emitted when the window is closed.
         mainWindow.on('closed', function() {
@@ -45,6 +44,24 @@ function main() {
         });
 
         mainWindow.loadUrl('file://' + __dirname + '/index.html');
+
+        if (process.platform == 'darwin') {
+            var name = require('app').getName();
+            var template = [
+                {
+                    label: name,
+                    submenu: [
+                        {
+                            label: '退出',
+                            accelerator: 'Command+Q',
+                            click: function() { app.quit(); }
+                        },
+                    ]
+                },
+            ];
+            menu = Menu.buildFromTemplate(template);
+            Menu.setApplicationMenu(menu);
+        }
     });
 }
 
