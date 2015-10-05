@@ -6,12 +6,23 @@ var path = require('path');
 var net = require('net');
 var util = require('util');
 var Menu = require('menu');
+var dialog = require('dialog');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
 global.mainWindow = null;
 global.menu = null;
 
+
+function generateRandomPassword(length) {
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    var randomstring = '';
+    for (var i=0; i<length; i++) {
+        var rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum,rnum+1);
+    }
+    return randomstring;                       
+}
 
 function main() {
     app.on('window-all-closed', function() {
@@ -51,6 +62,14 @@ function main() {
                 {
                     label: name,
                     submenu: [
+                        {
+                            label: '生成密码',
+                            click: function() {
+                                var r = generateRandomPassword(16);
+                                console.log("password:" + r);
+                                dialog.showMessageBox({type:"info", message:"随机密码", detail:r, buttons:["确定"]});
+                            }
+                        },
                         {
                             label: '退出',
                             accelerator: 'Command+Q',
