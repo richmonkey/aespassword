@@ -40,6 +40,7 @@
 <section class="update dialog" id="update_wrap">
     <div class="form-wrap">
         <h2>修改</h2>
+
         <div class="ipt-wrap">
             <input type="hidden" name="id" value="">
             <label>服务商：<input type="text" name="serviceProvider" class="ipt"></label>
@@ -54,10 +55,13 @@
 <section class="show dialog" id="show_wrap">
     <div class="form-wrap">
         <h2>输入密钥</h2>
+
         <div class="ipt-wrap">
             <input type="hidden" name="id" value="">
+            <label>服务商：<span class="provider"></span></label>
+            <label>用户名：<span class="username"></span></label>
+            <label><span id="show_pass" class="show-pass"></span></label>
             <label>密钥：<input type="text" name="secretKey" class="ipt"></label>
-            <label id="show_pass" class="show-pass"></label>
             <label><input class="btn btn-primary" type="button" id="show" value="确认"/></label>
             <label><input class="btn btn-cancel cancel" type="button" id="cancel_show" value="关闭"/></label>
         </div>

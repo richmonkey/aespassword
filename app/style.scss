@@ -192,10 +192,13 @@ table {
     }
     &.show{
         .form-wrap{
-            height: 250px;
-            .show-pass{
-                padding-bottom: 10px;
+            height: 320px;
+            label{
+                padding:4px 0;
             }
+            //.show-pass{
+            //    padding-bottom: 10px;
+            //}
         }
     }
     .form-wrap {

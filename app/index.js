@@ -40,15 +40,6 @@ var helper = {
             tip.style.display = 'none';
         }, timer);
 
-    },
-    generateRandomPassword: function (length) {
-        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-        var randomstring = '';
-        for (var i = 0; i < length; i++) {
-            var rnum = Math.floor(Math.random() * chars.length);
-            randomstring += chars.substring(rnum, rnum + 1);
-        }
-        return randomstring;
     }
 };
 
@@ -243,6 +234,8 @@ onload = function () {
                 update.style.display = 'block';
             } else if (action == 'show') {
                 var show = document.getElementById('show_wrap');
+                show.querySelector('.provider').innerText = provider;
+                show.querySelector('.username').innerText = user;
                 show.querySelector('input[name="id"]').value = id;
                 show.style.display = 'block';
             }
@@ -281,11 +274,11 @@ onload = function () {
     };
     document.getElementById('cancel_show').onclick = function () {
         document.getElementById('show_pass').innerText = '';
-        document.getElementById('show_wrap').querySelector('input[name="secretKey"]').value = '';
-        document.getElementById('show_wrap').style.display = 'none';
+        var show = document.getElementById('show_wrap');
+        show.querySelector('input[name="secretKey"]').value = '';
+        show.querySelector('.provider').innerHTML = '';
+        show.querySelector('.username').innerHTML = '';
+        show.style.display = 'none';
     };
-    //document.getElementById('create_random').onclick = function () {
-        //alert(helper.generateRandomPassword(16));
-    //};
     loadList();
 };
