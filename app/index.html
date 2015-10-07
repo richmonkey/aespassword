@@ -16,6 +16,7 @@
             <label>密码：<input type="text" id="pass" class="ipt"></label>
             <label>密钥：<input type="text" id="secretKey" class="ipt"></label>
             <input class="btn btn-primary" type="button" id="create" value="创建"/>
+            <!--<input class="btn btn-primary" type="button" id="create_random" value="随机密码"/>-->
         </div>
     </form>
     <!--<input class="btn btn-primary" type="button" id="update" value="更新密码"/>-->
@@ -56,8 +57,9 @@
         <div class="ipt-wrap">
             <input type="hidden" name="id" value="">
             <label>密钥：<input type="text" name="secretKey" class="ipt"></label>
+            <label id="show_pass" class="show-pass"></label>
             <label><input class="btn btn-primary" type="button" id="show" value="确认"/></label>
-            <label><input class="btn btn-cancel cancel" type="button" id="cancel_show" value="取消"/></label>
+            <label><input class="btn btn-cancel cancel" type="button" id="cancel_show" value="关闭"/></label>
         </div>
     </div>
 </section>

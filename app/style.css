@@ -161,6 +161,8 @@ table {
     height: 100%; }
   .dialog.show .form-wrap {
     height: 250px; }
+    .dialog.show .form-wrap .show-pass {
+      padding-bottom: 10px; }
   .dialog .form-wrap {
     position: absolute;
     width: 400px;

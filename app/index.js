@@ -40,6 +40,15 @@ var helper = {
             tip.style.display = 'none';
         }, timer);
 
+    },
+    generateRandomPassword: function (length) {
+        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        var randomstring = '';
+        for (var i = 0; i < length; i++) {
+            var rnum = Math.floor(Math.random() * chars.length);
+            randomstring += chars.substring(rnum, rnum + 1);
+        }
+        return randomstring;
     }
 };
 
@@ -250,8 +259,8 @@ onload = function () {
         try {
             var p = password.decrypt(secretKey, pass, iv);
             tr.querySelector('.pass').innerText = p;
-            show.querySelector('input[name="secretKey"]').value = '';
-            document.getElementById('show_wrap').style.display = 'none';
+            document.getElementById('show_pass').innerText = '密码：' + p;
+            //document.getElementById('show_wrap').style.display = 'none';
 
         } catch (e) {
             helper.tip('密钥错误！');
@@ -271,7 +280,12 @@ onload = function () {
         show();
     };
     document.getElementById('cancel_show').onclick = function () {
+        document.getElementById('show_pass').innerText = '';
+        document.getElementById('show_wrap').querySelector('input[name="secretKey"]').value = '';
         document.getElementById('show_wrap').style.display = 'none';
     };
+    //document.getElementById('create_random').onclick = function () {
+        //alert(helper.generateRandomPassword(16));
+    //};
     loadList();
 };
