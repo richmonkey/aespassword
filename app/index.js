@@ -70,14 +70,6 @@ onload = function () {
                 return;
             }
             document.querySelector('#list tbody').innerHTML = htmlLayout.buildList(rows);
-            //for (var i = 0; i < rows.length; i++) {
-            //    var row = rows[i];
-            //
-            //    console.log(util.format("%d:%s:%s:%s:%s", row.id, row.provider, row.name, row.password, row.iv));
-            //
-            //    var p = password.decrypt(secretKey, row.password, row.iv);
-            //    console.log("clear password:" + p);
-            //}
         });
     };
     //for test
@@ -119,7 +111,7 @@ onload = function () {
                     });
                 } else if (!password.isCryptKeyEqual(secretKey, signedKey)) {
                     //新的密钥和上次不一样， alert
-                    callback("err");
+                    callback("err_diff_password");
                     return;
                 } else {
                     callback(null);
@@ -140,6 +132,8 @@ onload = function () {
                 helper.tip('创建成功！');
                 document.getElementById('form').reset();
                 loadList();
+            } else if (err == "err_diff_password") {
+                helper.tip('您使用的密钥和上次使用的不相同');
             } else {
                 helper.tip('创建失败！');
             }
@@ -182,7 +176,7 @@ onload = function () {
             function (signedKey, callback) {
                 if (!password.isCryptKeyEqual(secretKey, signedKey)) {
                     //新的密钥和上次不一样， alert
-                    callback("err");
+                    callback("err_diff_password");
                     return;
                 }
                 password.updatePassword(passwordID, serviceProvider,
@@ -197,6 +191,8 @@ onload = function () {
                 helper.tip('修改成功！');
                 loadList();
                 document.querySelector('.dialog').style.display = 'none';
+            } else if (err == "err_diff_password") {
+                helper.tip('密钥错误！');
             } else {
                 helper.tip('修改失败！');
             }
