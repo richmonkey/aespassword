@@ -258,7 +258,7 @@ onload = function () {
             iv = tr.dataset.iv;
         try {
             var p = password.decrypt(secretKey, pass, iv);
-            tr.querySelector('.pass').innerText = p;
+            //tr.querySelector('.pass').innerText = p;
             document.getElementById('show_pass').innerText = '密码：' + p;
             //document.getElementById('show_wrap').style.display = 'none';
 
