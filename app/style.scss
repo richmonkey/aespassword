@@ -13,10 +13,35 @@
     height: 55px;
     padding: 10px 15px;
     position: relative;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     text-align: right;
     .btn {
         margin-left: 10px;
         margin-top: -12px;
+    }
+    .form-wrap {
+        .ipt-large {
+            width: 160px;
+        }
+        .ipt-small {
+            width: 80px;
+        }
+        .pass-wrap {
+            position: relative;
+        }
+        .pass {
+            position: absolute;
+            right: 3px;
+            top: 3px;
+            background: #fefefe url(images/pass.png) no-repeat;
+            width: 24px;
+            height: 24px;
+            background-size: 24px;
+            opacity: .6;
+            cursor: pointer;
+        }
     }
 }
 
@@ -135,6 +160,7 @@ table {
         vertical-align: middle;
     }
     .ipt {
+        outline: none;
         -webkit-appearance: none;
         -moz-appearance: none;
         border-radius: 0;
@@ -178,7 +204,7 @@ table {
     }
 }
 
-.dialog{
+.dialog {
     display: none;
     &:before {
         content: ' ';
@@ -190,11 +216,11 @@ table {
         width: 100%;
         height: 100%;
     }
-    &.show{
-        .form-wrap{
+    &.show {
+        .form-wrap {
             height: 320px;
-            label{
-                padding:4px 0;
+            label {
+                padding: 4px 0;
             }
             //.show-pass{
             //    padding-bottom: 10px;
@@ -231,7 +257,7 @@ table {
             border-top-right-radius: 5px;
 
         }
-        .btn{
+        .btn {
             margin-bottom: 10px;
         }
     }

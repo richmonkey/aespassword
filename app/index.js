@@ -40,6 +40,16 @@ var helper = {
             tip.style.display = 'none';
         }, timer);
 
+    },
+    generateRandomPassword: function (length) {
+        length = length || 16;
+        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        var randomstring = '';
+        for (var i = 0; i < length; i++) {
+            var rnum = Math.floor(Math.random() * chars.length);
+            randomstring += chars.substring(rnum, rnum + 1);
+        }
+        return randomstring;
     }
 };
 
@@ -279,6 +289,10 @@ onload = function () {
         show.querySelector('.provider').innerHTML = '';
         show.querySelector('.username').innerHTML = '';
         show.style.display = 'none';
+    };
+    document.getElementById('generation_password').onclick = function () {
+        var pass = helper.generateRandomPassword();
+        document.getElementById('pass').value = pass;
     };
     loadList();
 };
