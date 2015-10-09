@@ -14,6 +14,18 @@ module.exports = function(grunt) {
                     sign: 'iPhone Developer: Zhifeng Zhou',
                     overwrite: true
                 }
+            },
+            win32Build: {
+                options: {
+                    name: 'AESPassword',
+                    dir: 'app',
+                    out: 'dist/win32',
+                    version: '0.30.2',
+                    platform: 'win32',
+                    arch:"ia32",
+                    icon:"assets/win/panda.ico",
+                    overwrite: true
+                }
             }
         },
 
