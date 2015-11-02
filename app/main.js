@@ -17,15 +17,15 @@ global.menu = null;
 function generateRandomPassword(length) {
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
     var randomstring = '';
-    for (var i=0; i<length; i++) {
+    for (var i = 0; i < length; i++) {
         var rnum = Math.floor(Math.random() * chars.length);
-        randomstring += chars.substring(rnum,rnum+1);
+        randomstring += chars.substring(rnum, rnum + 1);
     }
-    return randomstring;                       
+    return randomstring;
 }
 
 function main() {
-    app.on('window-all-closed', function() {
+    app.on('window-all-closed', function () {
         // On OS X it is common for applications and their menu bar
         // to stay active until the user quits explicitly with Cmd + Q
         if (process.platform != 'darwin') {
@@ -39,18 +39,20 @@ function main() {
 
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
-    app.on('ready', function() {
+    app.on('ready', function () {
         // Create the browser window.
-        mainWindow = new BrowserWindow({width: 800, height: 600, frame:true, 
-                                        'web-preferences': {
-                                            'plugins': true,
-                                        }});
+        mainWindow = new BrowserWindow({
+            width: 800, height: 600, frame: true,
+            'web-preferences': {
+                'plugins': true,
+            }
+        });
 
         // Open the devtools.
         //mainWindow.openDevTools();
 
         // Emitted when the window is closed.
-        mainWindow.on('closed', function() {
+        mainWindow.on('closed', function () {
             mainWindow = null;
         });
 
@@ -64,17 +66,22 @@ function main() {
                     submenu: [
                         {
                             label: '生成密码',
-                            click: function() {
+                            click: function () {
                                 var r = generateRandomPassword(16);
                                 console.log("password:" + r);
-                                dialog.showMessageBox({type:"info", message:"随机密码", detail:r, buttons:["确定"]});
+                                dialog.showMessageBox({type: "info", message: "随机密码", detail: r, buttons: ["确定"]});
                             }
                         },
                         {
                             label: '退出',
                             accelerator: 'Command+Q',
-                            click: function() { app.quit(); }
+                            click: function () {
+                                app.quit();
+                            }
                         },
+                        {type: "separator"},
+                        {label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:"},
+                        {label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:"}
                     ]
                 },
             ];
