@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/* line 1, style.scss */
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+
+/* line 8, style.scss */
+.container {
+  width: 800px;
+  min-height: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 13, style.scss */
+.container h1 {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #0070A2;
+  padding: 100px 0 20px;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+/* line 21, style.scss */
+.container .desc {
+  font-size: 24px;
+  color: #555;
+  padding-bottom: 40px;
+}
+/* line 26, style.scss */
+.container .btn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  background-color: #55595e;
+  padding: 0.6rem 0.8rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  -webkit-border-radius: 6px;
+  text-decoration: none;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-transition: background-color 0.25s ease;
+  -moz-transition: background-color 0.25s ease;
+  -ms-transition: background-color 0.25s ease;
+  -o-transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease;
+}
+/* line 43, style.scss */
+.container .btn.btn-download {
+  height: 54px;
+  width: 265px;
+  font-weight: 600;
+  line-height: 54px;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+/* line 52, style.scss */
+.container .btn.green {
+  background-color: #55b848;
+}
+/* line 54, style.scss */
+.container .btn.green:hover {
+  background-color: #4ca640;
+}
+/* line 59, style.scss */
+.container .download-wrap {
+  padding-top: 20px;
+  text-align: center;
+}
+/* line 62, style.scss */
+.container .download-wrap .btn {
+  margin: 0 10px;
+}
