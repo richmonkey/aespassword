@@ -24,12 +24,47 @@ function generateRandomPassword(length) {
     return randomstring;
 }
 
+function createMainWindow() {
+    mainWindow = new BrowserWindow({
+        width: 800, height: 600, frame: true,
+        'web-preferences': {
+            'plugins': true,
+        }
+    });
+
+    // Open the devtools.
+    //mainWindow.openDevTools();
+
+    // Emitted when the window is closed.
+    mainWindow.on('closed', function () {
+        mainWindow = null;
+    });
+
+    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+}
+
 function main() {
     app.on('window-all-closed', function () {
         // On OS X it is common for applications and their menu bar
         // to stay active until the user quits explicitly with Cmd + Q
         if (process.platform != 'darwin') {
             app.quit();
+        }
+    });
+
+    //v0.30.2
+    app.on('activate-with-no-open-windows', function() {
+        console.log("activate-with-no-open-windows");
+        if (!mainWindow) {
+            createMainWindow();
+        }
+    });
+
+    //v0.34.2
+    app.on("activate", function(event, hasVisibleWindows) {
+        console.log("app activate:" + hasVisibleWindows);
+        if (!mainWindow) {
+            createMainWindow();
         }
     });
 
@@ -40,24 +75,8 @@ function main() {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
     app.on('ready', function () {
-        // Create the browser window.
-        mainWindow = new BrowserWindow({
-            width: 800, height: 600, frame: true,
-            'web-preferences': {
-                'plugins': true,
-            }
-        });
-
-        // Open the devtools.
-        //mainWindow.openDevTools();
-
-        // Emitted when the window is closed.
-        mainWindow.on('closed', function () {
-            mainWindow = null;
-        });
-
-        mainWindow.loadUrl('file://' + __dirname + '/index.html');
-
+        console.log("ready");
+        createMainWindow();
         if (process.platform == 'darwin') {
             var name = require('app').getName();
             var template = [

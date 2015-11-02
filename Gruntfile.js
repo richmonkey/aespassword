@@ -11,7 +11,6 @@ module.exports = function(grunt) {
                     arch: 'x64',
                     "app-bundle-id": 'com.beetle.aespassword',
                     icon: 'assets/osx/panda.icns',
-                    sign: 'iPhone Developer: Zhifeng Zhou',
                     overwrite: true
                 }
             },

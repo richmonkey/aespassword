@@ -2,7 +2,7 @@
   "name": "AESPassword",
   "version": "0.1.0",
   "scripts": {
-    "dev": "electron ./app",
+    "dev": "electron ./app"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
