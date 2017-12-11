@@ -15,13 +15,10 @@
 
 
 #生成dmg
-grunt -v electron:osxBuild
-grunt -v appdmg
-
-
+yarn run dist
 
 #win安装包
-1. grunt -v electron:win32Build
+1. yarn run packWin32
 
 2. 下载并安装Inno 5.5.6 unicode 版本
    下载地址:http://jrsoftware.org/isdl.php
