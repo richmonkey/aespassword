@@ -1,12 +1,16 @@
-var app = require('app');  // Module to control application life.
-var shell = require('shell');
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+const electron = require('electron');
+var app = electron.app;
+var BrowserWindow = electron.BrowserWindow;
+var Tray = electron.Tray;
+var Menu = electron.Menu;
+var dialog = electron.dialog;
+var shell = electron.shell;
+
 var fs = require('fs');
 var path = require('path');
 var net = require('net');
-var util = require('util');
-var Menu = require('menu');
-var dialog = require('dialog');
+
+const DEBUG = false;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
@@ -26,21 +30,26 @@ function generateRandomPassword(length) {
 
 function createMainWindow() {
     mainWindow = new BrowserWindow({
-        width: 800, height: 600, frame: true,
+        width: 800,
+        height: 600,
+        frame: true,
+        backgroundColor:'#ffffff',
         'web-preferences': {
             'plugins': true,
         }
     });
 
     // Open the devtools.
-    //mainWindow.openDevTools();
+    if (DEBUG) {
+        mainWindow.openDevTools();
+    }
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
 
-    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/index.html');
 }
 
 function main() {
@@ -78,7 +87,7 @@ function main() {
         console.log("ready");
         createMainWindow();
         if (process.platform == 'darwin') {
-            var name = require('app').getName();
+            var name = app.getName();
             var template = [
                 {
                     label: name,
@@ -89,6 +98,14 @@ function main() {
                                 var r = generateRandomPassword(16);
                                 console.log("password:" + r);
                                 dialog.showMessageBox({type: "info", message: "随机密码", detail: r, buttons: ["确定"]});
+                            }
+                        },
+                        {
+                            label: '备份',
+                            click: function () {
+                                var dbPath = path.join(app.getPath("userData"), "password.db3");
+                                console.log("password db path:" + dbPath);
+                                shell.showItemInFolder(dbPath)
                             }
                         },
                         {
@@ -111,4 +128,3 @@ function main() {
 }
 
 main();
-

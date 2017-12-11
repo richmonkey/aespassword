@@ -1,12 +1,14 @@
 {
   "name": "AESpassword",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "main.js",
   "description": "aespassword is another 1password",
   "productName": "AESPassword",
+  "license": "UNLICENSED",
+  "author": "richmonkey",
   "dependencies": {
     "async": "^1.4.2",
-    "sqlite3": "^3.1.0",
+    "sqlite3": "^3.1.13",
     "underscore-plus": "^1.6.6"
   }
 }

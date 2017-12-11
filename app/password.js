@@ -1,10 +1,10 @@
 var sqlite3 = require('sqlite3').verbose();
 var async = require('async');
 var crypto = require('crypto');
-
-var remote = require('remote');
-var app = remote.require('app');
 var path = require("path");
+
+var electron = require('electron');
+var app = require('electron').remote.app;
 
 var AESCrypt = {};
 
@@ -169,7 +169,7 @@ exports.saveCryptKey = function(key, cb) {
 }
 
 exports.updateCryptKey = function(oldKey, newKey, cb) {
-    
+
 }
 
 exports.getCryptKey = function(cb) {

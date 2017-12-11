@@ -1,12 +1,24 @@
 {
   "name": "AESPassword",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "license": "UNLICENSED",
+  "build": {
+      "appId": "com.beetle.aespassword",
+      "electronVersion":"1.7.9"
+  },
   "scripts": {
-    "dev": "electron ./app"
+      "dev": "electron ./app",
+      "packWin32": "build --win --ia32 --dir",
+      "distWin32": "build --win --ia32",
+      "packWin64": "build --win --x64 --dir",
+      "distWin64": "build --win --x64",
+      "packMac": "build --mac --dir",
+      "distMac": "build --mac",
+      "pack": "build --dir",
+      "dist": "build"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-appdmg": "^0.3.2",
-    "grunt-electron": "^2.0.1"
+    "electron-builder": "^19.46.4",
+    "electron-rebuild": "^1.6.0"
   }
 }
